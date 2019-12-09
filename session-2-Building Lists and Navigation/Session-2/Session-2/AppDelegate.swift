@@ -15,6 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let stru1 = Stru1L(id: 100)
+        let each = ForEachT<Int>(stru1, id: \.id)
+        print(each)
         return true
     }
 
@@ -34,4 +37,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+struct Stru1L: Hashable, Codable, Identifiable {
+    var id: Int
+}
+public struct ForEachT<ID> where  ID : Hashable {
 
+    /// The collection of underlying identified data.
+//    public var id: ID
+
+    /// A function that can be used to generate content on demand given
+    /// underlying data.
+    var id: KeyPath<Stru1L, ID>?
+     init<ID>(_ data: Stru1L, id: KeyPath<Stru1L, ID>) {
+        print(data, id)
+//        self.id = id
+    }
+    
+}
